@@ -70,7 +70,7 @@ git_info() {
 # Use ❯ as the non-root prompt character; # for root
 # Change the prompt character color if the last command had a nonzero exit code
 PS1='
-$(ssh_info)%{$fg[yellow]%}%~%u $(git_info)
+$(ssh_info)%{$fg[magenta]%}%~%u $(git_info)
 %(?.%{$fg[green]%}.%{$fg[red]%})%(!.#.❯)%{$reset_color%} '
 
 ZSH_DISABLE_COMPFIX="true"
@@ -80,3 +80,4 @@ export ZSH="/Users/mjagiello/.oh-my-zsh"
 plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
