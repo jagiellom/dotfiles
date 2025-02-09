@@ -75,9 +75,11 @@ $(ssh_info)%{$fg[magenta]%}%~%u $(git_info)
 
 ZSH_DISABLE_COMPFIX="true"
 
-export ZSH="/Users/mjagiello/.oh-my-zsh"
+export ZSH=$HOME/.oh-my-zsh
 
 plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null || source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+export PATH=$PATH:/usr/local/go/bin
