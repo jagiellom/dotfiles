@@ -13,16 +13,12 @@ vim.g.omni_sql_no_default_maps = 1
 
 vim.cmd "set noshowmode"
 
-vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(
-  vim.lsp.handlers.signature_help, {
-    border = 'rounded',
-    close_events = { "CursorMoved", "BufHidden", "InsertCharPre" },
-  }
-)
-vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(
-  vim.lsp.handlers.hover, {
-    border = 'rounded',
-  }
-)
-
-vim.diagnostic.config({ virtual_lines = true })
+vim.lsp.handlers['textDocument/signatureHelp'] =
+    vim.lsp.buf.signature_help({
+      border = 'rounded',
+      close_events = { "CursorMoved", "BufHidden", "InsertCharPre" },
+    })
+vim.lsp.handlers['textDocument/hover'] =
+    vim.lsp.buf.hover({
+      border = 'rounded',
+    })

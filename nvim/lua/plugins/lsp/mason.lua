@@ -13,6 +13,11 @@ return {
         "lua_ls",
         "gopls"
       },
+      automatic_enable = {
+        exclude = {
+          "clangd",
+        }
+      }
     })
   end,
 }

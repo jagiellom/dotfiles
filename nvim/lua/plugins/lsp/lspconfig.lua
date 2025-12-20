@@ -35,25 +35,39 @@ return {
 
     local capabilities = cmp_nvim_lsp.default_capabilities()
 
-    local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
-    for type, icon in pairs(signs) do
-      local hl = "DiagnosticSign" .. type
-      vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
-    end
-
     mason.setup()
-    mason_lspconfig.setup()
+    mason_lspconfig.setup({
+      automatic_installation = false,
+    })
 
     lspconfig.lua_ls.setup({
       capabilities = capabilities
     })
 
-    lspconfig.gopls.setup({
+    lspconfig.pylsp.setup({
       capabilities = capabilities
     })
 
-    lspconfig.pylsp.setup({
-      capabilities = capabilities
+    lspconfig.clangd.setup({
+      capabilities = capabilities,
+      handlers = {
+        ["textDocument/signatureHelp"] = function() end,
+      },
+    })
+
+    vim.diagnostic.config({
+      signs = {
+        text = {
+          [vim.diagnostic.severity.ERROR] = " ",
+          [vim.diagnostic.severity.WARN] = " ",
+          [vim.diagnostic.severity.HINT] = "󰠠 ",
+          [vim.diagnostic.severity.INFO] = " ",
+        },
+      },
+      virtual_text = true,
+      underline = true,
+      severity_sort = true,
+      update_in_insert = false,
     })
   end,
 }
