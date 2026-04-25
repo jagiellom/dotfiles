@@ -22,3 +22,22 @@ vim.lsp.handlers['textDocument/hover'] =
     vim.lsp.buf.hover({
       border = 'rounded',
     })
+
+
+-- golang makeprg
+vim.api.nvim_create_autocmd("FileType", {
+
+  pattern = 'go',
+  callback = function()
+    vim.opt_local.makeprg = "go build"
+  end,
+})
+
+-- clangd makepgr
+vim.api.nvim_create_autocmd("FileType", {
+
+  pattern = 'cpp',
+  callback = function()
+    vim.opt_local.makeprg = "cmake --build build"
+  end,
+})

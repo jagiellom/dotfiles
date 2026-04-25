@@ -1,34 +1,34 @@
 return {
-  "nvim-telescope/telescope.nvim",
-  dependencies = {
-    "nvim-lua/plenary.nvim",
-    { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-    "nvim-tree/nvim-web-devicons",
-  },
-  config = function()
-    local telescope = require("telescope")
-    local actions = require("telescope.actions")
-    telescope.setup({
-      defaults = {
-        path_display = { "smart" },
-        mappings = {
-          i = {
-            ["<C-p>"] = actions.move_selection_previous,
-            ["<C-n>"] = actions.move_selection_next,
-            ["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
-          },
-        },
-      },
-    })
-
-    telescope.load_extension("fzf")
-
-    local map = vim.keymap
-
-    map.set("n", "<leader>ff", "<cmd>Telescope find_files<CR>", { desc = "Find file" })
-    map.set("n", "<leader>fb", "<cmd>Telescope buffers<CR>", { desc = "Find buffer" })
-    map.set("n", "<leader>fg", "<cmd>Telescope live_grep<CR>", { desc = "Find file" })
-    map.set("n", "<leader>ff", "<cmd>Telescope find_files<CR>", { desc = "Find file" })
-
-    end,
-  }
+  --   "nvim-telescope/telescope.nvim",
+  --   dependencies = {
+  --     "nvim-lua/plenary.nvim",
+  --     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+  --     "nvim-tree/nvim-web-devicons",
+  --   },
+  --   config = function()
+  --     local telescope = require("telescope")
+  --     local actions = require("telescope.actions")
+  --     telescope.setup({
+  --       defaults = {
+  --         path_display = { "smart" },
+  --         mappings = {
+  --           i = {
+  --             ["<C-p>"] = actions.move_selection_previous,
+  --             ["<C-n>"] = actions.move_selection_next,
+  --             ["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
+  --           },
+  --         },
+  --       },
+  --     })
+  --
+  --     telescope.load_extension("fzf")
+  --
+  --     local map = vim.keymap
+  --
+  --     map.set("n", "<leader>ff", "<cmd>Telescope find_files<CR>", { desc = "Find file" })
+  --     map.set("n", "<leader>fb", "<cmd>Telescope buffers<CR>", { desc = "Find buffer" })
+  --     map.set("n", "<leader>fg", "<cmd>Telescope live_grep<CR>", { desc = "Find file" })
+  --     map.set("n", "<leader>ff", "<cmd>Telescope find_files<CR>", { desc = "Find file" })
+  --
+  --     end,
+}

@@ -17,9 +17,9 @@ return {
       callback = function(e)
         local opts = { buffer = e.buf, silent = true }
         opts.desc = "Find all references"
-        map.set("n", "gr", "<cmd>Telescope lsp_references<CR>", opts)
+        map.set("n", "gr", "<cmd>FzfLua lsp_references<CR>", opts)
         opts.desc = "Find definitions"
-        map.set("n", "gd", "<cmd>Telescope lsp_definitions<CR>", opts)
+        map.set("n", "gd", "<cmd>FzfLua lsp_definitions<CR>", opts)
         opts.desc = "Go to declaration"
         map.set("n", "gD", vim.lsp.buf.declaration, opts)
         opts.desc = "Rename"
@@ -49,6 +49,12 @@ return {
     })
 
     lspconfig.clangd.setup({
+      cmd = {
+        "clangd",
+        "--background-index",
+        "--clang-tidy",
+        "--completion-style=detailed",
+      },
       capabilities = capabilities,
       handlers = {
         ["textDocument/signatureHelp"] = function() end,
@@ -64,10 +70,27 @@ return {
           [vim.diagnostic.severity.INFO] = " ",
         },
       },
-      virtual_text = true,
+      virtual_text = false,
       underline = true,
       severity_sort = true,
       update_in_insert = false,
+    })
+    vim.api.nvim_create_autocmd("CursorHold", {
+      callback = function()
+        vim.diagnostic.open_float(nil, { focusable = false })
+      end,
+    })
+    vim.o.updatetime = 300;
+
+    vim.api.nvim_create_autocmd({ "BufWritePost", "ModeChanged" }, {
+      callback = function(args)
+        if args.event == "BufWritePost"
+            or (args.event == "ModeChanged"
+              and args.match:match("^i.*:n$"))
+        then
+          vim.diagnostic.show(nil, args.buf)
+        end
+      end,
     })
   end,
 }
